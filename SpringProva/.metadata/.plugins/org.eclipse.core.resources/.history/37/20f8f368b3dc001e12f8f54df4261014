@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="modStyle.css">
+    <title>Modifica</title>
+</head>
+<body>
+
+    <div style="text-align:center;">
+
+        <form th:action="@{/aggiungiPD}" th:object="${pd}" method="post">
+
+            <table>
+                <tr>
+                    <th colspan="4">Aggiungi</th>
+                </tr>
+
+                <tr>
+                    <td>Nome</td>
+                    <td><input type="text" th:field="{*nome}"/></td>
+                </tr>
+
+                <tr>
+                    <td>Voto</td>
+                    <td><input type="text" th:field="{*voto}"/></td>
+                </tr>
+
+                <tr>
+                    <td>Anno</td>
+                    <td><input type="text" th:field="{*anno}"/></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><button type="submit">Salva</button></td>
+                </tr>
+            </table>
+
+
+        </form>
+    
+    
+    </div>
+    
+</body>
+</html>

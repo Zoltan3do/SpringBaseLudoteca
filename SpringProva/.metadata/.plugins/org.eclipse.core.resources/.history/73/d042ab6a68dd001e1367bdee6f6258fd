@@ -1,0 +1,33 @@
+package it.betalent.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import it.betalent.entity.Played;
+import it.betalent.repository.PDRepo;
+
+@RestController
+public class RESTController {
+
+	@Autowired
+	private PDRepo pdRepo;
+
+	@GetMapping("/all")
+	List<Played>all(){
+		return pdRepo.findAll();
+	}
+	
+	@PostMapping(value="/aggiunta",consumes = MediaType.APPLICATION_JSON_VALUE)
+	void nuovo(@RequestBody Played nuovoGioco) {
+		System.out.println(pdRepo.save(nuovoGioco).toString());
+	}
+	
+	
+
+}

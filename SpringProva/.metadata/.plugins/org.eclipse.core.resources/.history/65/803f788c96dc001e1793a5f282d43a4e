@@ -1,0 +1,60 @@
+package it.betalent.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import it.betalent.entity.Played;
+import it.betalent.service.PDService;
+
+@Controller
+public class PDController {
+	
+	@Autowired
+	private PDService pdService;
+	
+	@RequestMapping("/new")
+	public String nuovaPaginaVideogiochi(Model model) {
+		Played pd = new Played();
+		model.addAttribute("pd",pd);
+		return "modifica-pd";
+	}
+
+	@RequestMapping("/")
+	public String viewPlayed (Model model) {
+		List<Played> listaPD = pdService.listAll();
+		model.addAttribute("listaPD",listaPD);
+		for(Played p:listaPD) {
+			System.out.println(p.toString());
+		}
+		return ("played");
+	}
+	
+	@RequestMapping("/aggiungiPD")
+	public String salvaProdotto(@ModelAttribute("pd")Played pd) {
+		pdService.save(pd);
+		return "redirect:/";
+	}
+	
+	
+	@RequestMapping("/edit/{id}")
+	public ModelAndView showEditPD(@PathVariable(name="id")int id) {
+		ModelAndView mav = new ModelAndView("modifica-pd");
+		Played pd = pdService.get(id);
+		mav.addObject("pd",pd);
+		return mav;
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public String deletePD(@PathVariable(name="id") int id) {
+		pdService.delete(id);
+		return "redirect:/";
+	}
+	
+}

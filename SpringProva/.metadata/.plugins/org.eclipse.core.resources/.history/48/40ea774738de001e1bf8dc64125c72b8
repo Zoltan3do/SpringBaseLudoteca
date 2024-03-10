@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginstyle.css">
+    <title>Login</title>
+</head>
+<body>
+    <div style="align-items: center;">
+        <h1>Login</h1>
+        <form th:action="@{/autentica}">
+            <div >
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required
+                       autofocus>
+            </div>
+            <div >
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,5 @@
+package it.betalent.service;
+
+public class UserService {
+
+}

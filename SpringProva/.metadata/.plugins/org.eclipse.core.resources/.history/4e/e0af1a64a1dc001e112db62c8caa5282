@@ -1,0 +1,5 @@
+package it.betalent.controller;
+
+public class RESTController {
+
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="registrazionestyle.css">
+    <title>Registrazione</title>
+</head>
+<body>
+    
+    <div style="text-align:center;">
+        <form th:action="@{/aggiungiUser}" th:object="${user}" method="post">
+
+            <table>
+                <tr>
+                    <th colspan="4">Registrati</th>
+                </tr>
+
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" th:field="{*username}"/></td>
+                </tr>
+
+                <tr>
+                    <td>Password</td>
+                    <td><input type="text" th:field="{*password}"/></td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+    
+</body>
+</html>

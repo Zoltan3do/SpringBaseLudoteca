@@ -1,0 +1,15 @@
+package it.betalent.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import it.betalent.entity.Played;
+import it.betalent.entity.User;
+
+@Repository
+public interface UserRepository  extends JpaRepository<Played,Integer>{
+
+	List<User>findRegistered(String username,String password);
+}

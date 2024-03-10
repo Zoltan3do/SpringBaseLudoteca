@@ -1,0 +1,62 @@
+package it.betalent.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import it.betalent.entity.User;
+import it.betalent.service.UserService;
+
+@Controller
+public class UserController {
+
+	@Autowired
+	UserService userService;
+	
+	@RequestMapping("/login")
+	public String login(Model model) {
+		return "login";
+	}
+	
+	@RequestMapping("/autentica")
+	public String autentica(@RequestParam("username")String username,@RequestParam("password")String password,Model model) {
+		User user = userService.findByUsernameAndPassword(username,password);
+		if(username !=null ) {
+			for(User utente:userService.listaUtenti()) {
+				if(utente.getUsername().equals(username)) {
+					if(utente.getPassword().equals(password)) {
+						return "redirect:/played";
+					}else {
+						model.addAttribute("alert","nome utente o password errati");
+						return"login";
+					}
+				}else {
+					model.addAttribute("alert","nome utente o password errati");
+					return"login";
+				}
+			}
+		}else {
+			model.addAttribute("alert","nome utente o password errati");
+			return"login";
+		}
+		return "login";
+	}
+	
+	@RequestMapping("/registrazione")
+	public String registrazione(Model model) {
+		User user = new User();
+		model.addAttribute("user",user);
+		return "registrazione";
+	}
+	
+	@RequestMapping("/registra")
+	public String registra(@ModelAttribute("user")User user) {
+		userService.save(user);
+		return "redirect:/login";
+	}
+	
+	
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="playedStyle.css">
+<title>Finiti</title>
+</head>
+<body>
+
+	<div style="text-align: center;">
+
+		<h1>Videogiochi</h1>
+
+		<a href="/new">Aggiungi Videogioco</a><br>
+		<br>
+
+		<table class="tabella">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Voto</th>
+					<th>Anno</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="pd : ${listaPD}">
+					<td th:text="${pd.id}">ID</td>
+					<td th:text="${pd.nome}">Nome</td>
+					<td th:text="${pd.voto}">Voto</td>
+					<td th:text="${pd.anno}">Anno</td>
+
+					<td><a th:href="@{'/edit/' + ${pd.id}}">Modifica</a>
+						&nbsp;&nbsp;&nbsp; <a th:href="@{'/delete/' + ${pd.id}}">Elimina</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<form th:action="@{/perNome}">
+			<input type="text" name="nome" id="nome"
+				placeholder="nome del videogioco da cercare">
+			<button type="submit">Cerca</button>
+			<a href="/new">Torna indietro</a><br>
+		</form>
+	</div>
+
+</body>
+</html>

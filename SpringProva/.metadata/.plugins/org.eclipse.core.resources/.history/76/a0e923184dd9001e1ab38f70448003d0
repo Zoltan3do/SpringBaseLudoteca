@@ -1,0 +1,28 @@
+package it.betalent.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import it.betalent.entity.User;
+import it.betalent.repository.UserRepository;
+
+@Service
+@Transactional
+public class UserService {
+
+	@Autowired
+	UserRepository userRepo;
+
+	public void save(User ur) {
+		userRepo.save(ur);	
+	}
+	
+	public List<User>listAll(){
+		List<User>reg = userRepo.findAll();
+		return reg;
+	}
+
+}
